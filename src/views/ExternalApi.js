@@ -5,7 +5,7 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import config from "../auth_config.json";
 import Loading from "../components/Loading";
 
-const { apiOrigin = "https://pizza42-api-server" } = config;
+const { apiOrigin = "https://pizza42-api-server.herokuapp.com" } = config;
 
 export const ExternalApiComponent = () => {
   const [state, setState] = useState({
