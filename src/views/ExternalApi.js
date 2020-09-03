@@ -120,7 +120,7 @@ export const ExternalApiComponent = () => {
         </p>
 
         <Button color="primary" className="mt-5" onClick={callApi}>
-          Ping API
+          Order Pizza
         </Button>
       </div>
 
