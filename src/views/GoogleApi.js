@@ -34,7 +34,7 @@ export const ExternalApiComponent = () => {
       });
     }
 
-    await callApi();
+    await callGoogleAPI()
   };
 
   const handleLoginAgain = async () => {
@@ -51,33 +51,33 @@ export const ExternalApiComponent = () => {
       });
     }
 
-    await callApi();
+    await callGoogleAPI();
   };
 
-  const callApi = async () => {
+  const callGoogleAPI = async () =>{
     try {
       const token = await getAccessTokenSilently();
-
-      const response = await fetch(`${apiOrigin}/api/external`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const res = await fetch(`${apiOrigin}/google-connections`, {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
       });
 
-      const responseData = await response.json();
+      const data = await res.json();
 
       setState({
         ...state,
         showResult: true,
-        apiMessage: responseData,
-      });
+        apiMessage: data
+      })
     } catch (error) {
       setState({
         ...state,
         error: error.error,
       });
     }
-  };
+  }
+
   const handle = (e, fn) => {
     e.preventDefault();
     fn();
@@ -112,15 +112,13 @@ export const ExternalApiComponent = () => {
           </Alert>
         )}
 
-        <h1>External API</h1>
+        <h1>Google People APIs</h1>
         <p>
-          Ping an external API by clicking the button below. This will call the
-          external API using an access token, and the API will validate it using
-          the API's audience value.
+          Ping google's people API to get the total number of connections for the logged in users
         </p>
 
-        <Button color="primary" className="mt-5" onClick={callApi}>
-          Ping API
+        <Button color="primary" className="mt-5" onClick={callGoogleAPI}>
+          Ping Google API
         </Button>
       </div>
 
